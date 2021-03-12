@@ -1,8 +1,8 @@
-package com.company.model.repositories;
+package com.company.model.repositories; //package
 
-import com.company.model.entities.Car;
+import com.company.model.entities.Car; //entity package
 
-public interface IAddRepository {
+public interface IAddRepository { //interface of AddRepository
 
     public void addCar(Car newCar);
 
