@@ -1,29 +1,29 @@
-package com.company.model.repositories;
+package com.company.model.repositories;//package
 
-import com.company.model.database.IDB;
-import com.company.model.entities.Car;
+import com.company.model.database.IDB;//connection
+import com.company.model.entities.Car;//entity
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.sql.Connection;//Connection
+import java.sql.ResultSet;//ResultSet
+import java.sql.Statement;//Statement
+import java.util.ArrayList;//for arrays
 
-public class SearchRepository implements ISearchRepository{
-    private final IDB db;
+public class SearchRepository implements ISearchRepository{ //Search repository implements interface ISearchRepository
+    private final IDB db; //db
 
-    public SearchRepository(IDB db) {
+    public SearchRepository(IDB db) { //constructor
         this.db = db;
     }
 
     @Override
-    public ArrayList<Car> getAllCars() {
+    public ArrayList<Car> getAllCars() { //show the list of car by calling getAllCars()
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
 
-        ArrayList < Car > res = new ArrayList<>();
+        ArrayList < Car > res = new ArrayList<>(); //array
 
-        try {
+        try { //trycatch method to show the list of cars
 
             con = db.getConnection();
             st = con.createStatement();
@@ -50,20 +50,20 @@ public class SearchRepository implements ISearchRepository{
     }
 
     @Override
-    public ArrayList<Car> getCarsBySearch(Car search) {
+    public ArrayList<Car> getCarsBySearch(Car search) { //array for searching the cars
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
 
         ArrayList < Car > res = new ArrayList<>();
 
-        try {
-
+        try { //trycatch function to search cars
+//connection
             con = db.getConnection();
             st = con.createStatement();
             rs = st.executeQuery("select * from cars");
 
-            while(rs.next()){
+            while(rs.next()){ //cycle to find the cars by special characteristics
 
                 if(!search.getBrand().equals("0")){
                     if(!rs.getString(3).equals(search.getBrand())){
@@ -88,7 +88,7 @@ public class SearchRepository implements ISearchRepository{
 
                 res.add(new Car(rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getFloat(6), rs.getInt(7), rs.getString(8)));
             }
-
+//cycle will work till find your car
             return res;
 
 
